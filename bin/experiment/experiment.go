@@ -58,6 +58,7 @@ import (
 	ec2TerminateByTag "github.com/litmuschaos/litmus-go/experiments/kube-aws/ec2-terminate-by-tag/experiment"
 	springBootFaults "github.com/litmuschaos/litmus-go/experiments/spring-boot/spring-boot-faults/experiment"
 	vmpoweroff "github.com/litmuschaos/litmus-go/experiments/vmware/vm-poweroff/experiment"
+	experiment "github.com/litmuschaos/litmus-go/experiments/sample-experiment/sample-exec-chaos/experiment"
 
 	"github.com/litmuschaos/litmus-go/pkg/clients"
 	"github.com/litmuschaos/litmus-go/pkg/log"
@@ -182,6 +183,8 @@ func main() {
 		gcpVMInstanceStopByLabel.GCPVMInstanceStopByLabel(clients)
 	case "gcp-vm-disk-loss-by-label":
 		gcpVMDiskLossByLabel.GCPVMDiskLossByLabel(clients)
+	case "chaos":
+		experiment.Experiment(clients)
 	case "spring-boot-cpu-stress", "spring-boot-memory-stress", "spring-boot-exceptions", "spring-boot-app-kill", "spring-boot-faults", "spring-boot-latency":
 		springBootFaults.Experiment(clients, *experimentName)
 	default:
